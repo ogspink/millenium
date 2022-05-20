@@ -1,25 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react';
+
+import Layout from './components/Layout';
+import WorkersTable from './components/WorkersTable';
+import WorkerInput from './components/WorkerInput';
+
+let id = 0;
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [workers, setWorkers] = useState([]);
+    const maxLength = 5;
+
+    const handleAdd = value => {
+        const worker = {
+            ...value,
+            id: id++,
+        };
+
+        setWorkers([...workers, worker]);
+    }
+
+    const handleDelete = id => {
+        setWorkers(workers.filter(worker => worker.id !== id));
+    }
+
+    return (
+        <Layout>
+            <WorkersTable
+                workers={workers}
+                onDelete={handleDelete} />
+            <WorkerInput
+                onAdd={handleAdd}
+                disabled={workers.length >= maxLength}
+            />
+        </Layout>
+    )
 }
 
 export default App;

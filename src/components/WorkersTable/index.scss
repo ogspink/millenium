@@ -1,0 +1,29 @@
+$col-width: 100px;
+$col-height: 30px;
+
+.table {
+    display: grid;
+    grid-template-columns: $col-width $col-width;
+    grid-template-rows: repeat(2, #{$col-height});
+
+    &__title {
+        display: grid;
+        justify-content: center;
+        align-items: center;
+        grid-column: 1 / 3;
+        grid-row: 1 / 3;
+    }
+
+    &__row {
+        position: relative;
+        display: grid;
+        grid-template-columns: $col-width $col-width;
+        height: $col-height;
+        text-align: center;
+    }
+
+    &__delete {
+        position: absolute;
+        left: 200%;
+    }
+}

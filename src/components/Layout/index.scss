@@ -1,0 +1,93 @@
+$footer-nav-h: 50px;
+$content-w: calc(100% - 300px);
+$gradient-size: 100px;
+$animated-element-size: 100px;
+
+.layout {
+    background: #000;
+    height: 100%;
+    width: $content-w;
+    margin: 0 auto;
+
+    &__nav,
+    &__footer {
+        height: $footer-nav-h;
+        width: $content-w;
+        position: fixed;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 1;
+    }
+
+    &__nav {
+        top: 0;
+        background: red;
+    }
+
+    &__footer {
+        bottom: 0;
+        background: green;
+    }
+
+    &__content {
+        min-height: 2500px;
+        margin-top: $footer-nav-h;
+    }
+
+    &__c {
+        height: 300px;
+        width: calc(100% - 200px);
+        margin: 0 auto;
+        background: blue;
+        position: relative;
+
+        &::before,
+        &::after {
+            content: '';
+            width: $gradient-size;
+            height: 100%;
+            position: absolute;
+        }
+
+        &::before {
+            left: -#{$gradient-size};
+            background: linear-gradient(to left, white, transparent);
+        }
+
+        &::after {
+            right: -#{$gradient-size};
+            background: linear-gradient(to right, white, transparent);
+        }
+    }
+
+    &__e {
+        position: absolute;
+        left: 0;
+        width: $animated-element-size;
+        height: $animated-element-size;
+        background: yellow;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+
+        &:hover {
+            animation: slide-to-right 2s forwards;
+        }
+    }
+
+    &__children {
+        background: white;
+        height: 100%;
+    }
+}
+
+
+@keyframes slide-to-right {
+    from {
+        left: 0;
+    }
+
+    to {
+        left: calc(100% - #{$animated-element-size});
+    }
+}
